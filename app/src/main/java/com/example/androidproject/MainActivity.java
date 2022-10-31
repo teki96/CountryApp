@@ -42,8 +42,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle("Country search");
+
         mQueue = Volley.newRequestQueue(this);
         listView = findViewById(R.id.countryListView);
+
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countryList);
         listView.setAdapter(arrayAdapter);
         fetchCountryData();

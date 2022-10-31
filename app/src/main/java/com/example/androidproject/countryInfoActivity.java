@@ -22,15 +22,17 @@ public class countryInfoActivity extends AppCompatActivity {
     private RequestQueue mQueue;
     private String mCountryUrl;
     private JSONObject countryInfo;
-    private String mNativeName, mCapital, mRegion, mSubRegion, mCurrency, mLanguages = "";
+    private String mCapital, mRegion, mSubRegion, mLanguages = "";
     private int mPopulation = 0;
+    private static int FIRST_ELEMENT = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country_info);
-        TextView countryNameTextView = findViewById(R.id.countryNameView);
+        getSupportActionBar().setTitle("Country Info");
 
+        TextView countryNameTextView = findViewById(R.id.countryNameView);
         String mCountryName;
         mQueue = Volley.newRequestQueue(this);
         mCountryName = getIntent().getStringExtra("value");
@@ -60,21 +62,18 @@ public class countryInfoActivity extends AppCompatActivity {
     }
 
     private void parseJsonAndUpdateUI(JSONObject countryObject) {
-        TextView nativeNameTextView = (TextView) findViewById(R.id.nativeNameView);
-        TextView capitalTextView = (TextView) findViewById(R.id.capitalView);
-        TextView populationTextView = (TextView) findViewById(R.id.populationView);
-        TextView regionTextView = (TextView) findViewById(R.id.regionView);
-        TextView subRegionTextView = (TextView) findViewById(R.id.subRegionView);
-        TextView currencyTextView = (TextView) findViewById(R.id.currencyView);
-        TextView languagesTextView = (TextView) findViewById(R.id.languagesView);
+        TextView capitalTextView = findViewById(R.id.capitalView);
+        TextView populationTextView = findViewById(R.id.populationView);
+        TextView regionTextView = findViewById(R.id.regionView);
+        TextView subRegionTextView =findViewById(R.id.subRegionView);
+        TextView languagesTextView = findViewById(R.id.languagesView);
 
         try {
-            mNativeName = countryObject.getJSONObject("name").getJSONObject("nativeName").getJSONObject("fin").getString("common");
+
             mCapital = countryObject.getString("capital");
             mPopulation = countryObject.getInt("population");
             mRegion = countryObject.getString("region");
             mSubRegion = countryObject.getString("subregion");
-            mCurrency = countryObject.getJSONObject("currencies").getJSONObject("EUR").getString("name");
 
             JSONObject lang = countryObject.getJSONObject("languages");
             StringBuilder str = new StringBuilder();
@@ -82,8 +81,9 @@ public class countryInfoActivity extends AppCompatActivity {
 
             for(int i = 0; i < lang.length(); ++i){
                 String k = keys.next().toString();
-                System.out.println(k);
-                str.append(lang.getString(k) + ", ");
+
+                    str.append(lang.getString(k) + ", ");
+
             }
             mLanguages = str.toString();
 
@@ -91,13 +91,14 @@ public class countryInfoActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        nativeNameTextView.setText("" + mNativeName);
-        capitalTextView.setText("" + mCapital.substring(2, mCapital.length() - 2));
-        populationTextView.setText("" + mPopulation);
-        regionTextView.setText("" + mRegion);
-        subRegionTextView.setText("" + mSubRegion);
-        currencyTextView.setText("" + mCurrency);
-        languagesTextView.setText("" + mLanguages.substring(0, mLanguages.length() - 2));
+        if(mCapital != null) { mCapital = mCapital.substring(2, mCapital.length() - 2); }
+        if(mLanguages != null && mLanguages.length() > 2) { mLanguages = mLanguages.substring(0, mLanguages.length() - 2);}
+
+        capitalTextView.setText("" + mCapital + "");
+        populationTextView.setText("" + mPopulation + "");
+        regionTextView.setText("" + mRegion+ "");
+        subRegionTextView.setText("" + mSubRegion + "");
+        languagesTextView.setText("" + mLanguages + "");
     }
 
 }

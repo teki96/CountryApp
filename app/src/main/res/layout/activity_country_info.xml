@@ -22,19 +22,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/nativeNameView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/native_name"
-        android:textAlignment="viewStart"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/nativeNameTitleView"
-        app:layout_constraintTop_toBottomOf="@+id/countryNameView" />
-
-    <TextView
         android:id="@+id/subRegionView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -58,7 +45,7 @@
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/capitalTitleView"
-        app:layout_constraintTop_toBottomOf="@+id/nativeNameTitleView" />
+        app:layout_constraintTop_toBottomOf="@+id/countryNameView" />
 
     <TextView
         android:id="@+id/regionView"
@@ -84,46 +71,20 @@
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/languagesTextView"
-        app:layout_constraintTop_toBottomOf="@+id/currencyTitleView" />
+        app:layout_constraintTop_toBottomOf="@+id/subRegionTitleView" />
 
     <TextView
         android:id="@+id/populationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="16dp"
         android:text="@string/population"
         android:textAlignment="viewStart"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/PopulationTitleView"
         app:layout_constraintTop_toBottomOf="@+id/capitalTitleView" />
-
-    <TextView
-        android:id="@+id/currencyView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="17dp"
-        android:text="@string/currency"
-        android:textAlignment="viewStart"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/currencyTitleView"
-        app:layout_constraintTop_toBottomOf="@+id/subRegionTitleView" />
-
-    <TextView
-        android:id="@+id/nativeNameTitleView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/native_nameTitle"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countryNameView" />
 
     <TextView
         android:id="@+id/capitalTitleView"
@@ -136,7 +97,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nativeNameTitleView" />
+        app:layout_constraintTop_toBottomOf="@+id/countryNameView" />
 
     <TextView
         android:id="@+id/PopulationTitleView"
@@ -178,19 +139,6 @@
         app:layout_constraintTop_toBottomOf="@+id/regionTitleView" />
 
     <TextView
-        android:id="@+id/currencyTitleView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/currencyTitle"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subRegionTitleView" />
-
-    <TextView
         android:id="@+id/languagesTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -201,6 +149,6 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currencyTitleView" />
+        app:layout_constraintTop_toBottomOf="@+id/subRegionTitleView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
