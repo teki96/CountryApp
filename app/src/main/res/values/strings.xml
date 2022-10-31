@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name" translatable="false">AndroidProject</string>
+    <string name="search" translatable="false">Search</string>
+    <string name="country_name">Country name</string>
+    <string name="capital">Capital</string>
+    <string name="native_name">Native Name</string>
+    <string name="population">Population</string>
+    <string name="region">Region</string>
+    <string name="sub_region">Sub Region</string>
+    <string name="languages">Languages</string>
+    <string name="currency">Currency</string>
+    <string name="languagesTitle">Languages:</string>
+    <string name="currencyTitle">Currency:</string>
+    <string name="sub_regionTitle">Sub Region:</string>
+    <string name="regionTitle">Region:</string>
+    <string name="populationTitle">Population:</string>
+    <string name="capitalTitle">Capital:</string>
+    <string name="native_nameTitle">Native name:</string>
+</resources>

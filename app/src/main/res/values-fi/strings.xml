@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidProject</string>
+    <string name="country_name">Maan nimi</string>
+    <string name="capital">Pääkaupunki</string>
+    <string name="native_name">Natiivi nimi</string>
+    <string name="population">Väestö</string>
+    <string name="region">Alue</string>
+    <string name="sub_region">Osa-alue</string>
+    <string name="languages">Kielet</string>
+    <string name="currency">Valuutta</string>
+    <string name="languagesTitle">Kielet:</string>
+    <string name="currencyTitle">Valuutta:</string>
+    <string name="sub_regionTitle">Osa-alue:</string>
+    <string name="regionTitle">Alue:</string>
+    <string name="populationTitle">Väestö:</string>
+    <string name="capitalTitle">Pääkaupunki:</string>
+    <string name="native_nameTitle">Natiivi nimi:</string>
+</resources>
