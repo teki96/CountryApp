@@ -2,7 +2,10 @@ package com.example.androidproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,16 +14,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.app.SearchManager;
-import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
+
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -54,9 +53,13 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id){
-                Intent intent = new Intent(MainActivity.this, countryInfoActivity.class);
-                intent.putExtra("value", arrayAdapter.getItem(position).toString());
-                startActivity(intent);
+                if(isConnectedToInternet()) {
+                    Intent intent = new Intent(MainActivity.this, countryInfoActivity.class);
+                    intent.putExtra("value", arrayAdapter.getItem(position).toString());
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "No internet connection.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -68,25 +71,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fetchCountryData() {
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                mUrl,
-                null,
-                response -> {
-                    Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+        if(isConnectedToInternet()) {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
+                    mUrl,
+                    null,
+                    response -> {
+                        Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
 
-                    for (int i = 0; i < response.length(); i++) {
-                        try {
-                            countryInfo = response.getJSONObject(i);
-                            countryList.add(countryInfo.getJSONObject("name").getString("common"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                countryInfo = response.getJSONObject(i);
+                                countryList.add(countryInfo.getJSONObject("name").getString("common"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                }, error -> {
-                    error.printStackTrace();
-        });
-        //  Lisätään volley request queueen
-        mQueue.add(request);
+                    }, error -> {
+                error.printStackTrace();
+            });
+            //  Lisätään volley request queueen
+            mQueue.add(request);
+        } else {
+            Toast.makeText(getApplicationContext(), "No internet connection.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -135,5 +142,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    public boolean isConnectedToInternet(){
+        ConnectivityManager connectivity = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null)
+        {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null)
+                for (int i = 0; i < info.length; i++)
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED)
+                    {
+                        return true;
+                    }
+        }
+        return false;
     }
 }
